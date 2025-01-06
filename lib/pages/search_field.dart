@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_cuaca/pages/result.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({super.key});
@@ -8,6 +9,8 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
+  TextEditingController placeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +19,7 @@ class _SearchFieldState extends State<SearchField> {
           title: const Text("Tracking Cuaca", style: TextStyle(
             color: Colors.white
           ),),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.yellow[800],
           centerTitle: true,
         ),
 
@@ -26,20 +29,23 @@ class _SearchFieldState extends State<SearchField> {
             child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             const TextField(
-                decoration: InputDecoration(hintText: "ex: Jakarta"),
+            TextField(
+                decoration: const InputDecoration(hintText: "ex: Jakarta"),
+                controller: placeController,
               ),
 
               const SizedBox(
                 height: 20.0,
               ),
-              
+
               ElevatedButton(
                 onPressed: () {
-
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Result(place: placeController.text,); 
+                  }));
                 },
                 
-                child: const Text("Track") ,
+                child: const Text("Track"),
                 
                 ),
             ],
